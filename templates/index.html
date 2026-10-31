@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Portfolio | Developer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav class="navbar">
+
+    <a href="#" class="logo">MyPortfolio.</a>
+
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+</nav>
+
+
+<!-- HERO SECTION -->
+
+<section id="home" class="hero">
+
+    <div class="hero-content">
+
+        <p class="intro">HELLO, I'M</p>
+
+        <h1>Shlok Ojha</h1>
+
+        <h2>
+            Currently pursuing my undergraduate degree in
+            Electrical Engineering and a passionate developer.
+        </h2>
+
+        <p class="description">
+            I am passionate about technology, programming,
+            engineering and building useful digital solutions.
+        </p>
+
+    </div>
+
+    <div class="hero-image">
+
+        <img src="{{ url_for('static', filename='profile.jpg') }}"
+             alt="My Profile Photo"
+             class="profile-photo">
+
+    </div>
+
+</section>
+
+<!-- ABOUT SECTION -->
+
+<section id="about" class="section">
+
+    <h2>About Me</h2>
+
+    <p class="section-description">
+        I am an engineering student currently studying in IOE,pulchowk campus and  interested in
+        programming, technology and web development.
+
+        I enjoy learning new technologies and creating
+        projects that solve real-world problems.
+    </p>
+
+</section>
+
+
+<!-- SKILLS SECTION -->
+
+<section id="skills" class="section">
+
+    <h2>My Skills</h2>
+
+    <div class="skills-container">
+
+        <div class="skill">Python</div>
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">C Programming</div>
+        <div class="skill">Problem Solving</div>
+        <div class="skill">Git & GitHub</div>
+
+    </div>
+
+</section>
+
+
+<!-- PROJECTS SECTION -->
+
+<section id="projects" class="section">
+
+    <h2>My Projects</h2>
+
+    <div class="projects-container">
+
+        {% for project in projects %}
+
+        <div class="project-card">
+
+            <h3>{{ project.title }}</h3>
+
+            <p>{{ project.description }}</p>
+
+            <p class="technology">
+                {{ project.tech }}
+            </p>
+
+            <a href="{{ project.link }}">View Project →</a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT SECTION -->
+
+<section id="contact" class="section">
+
+    <h2>Contact Me</h2>
+
+    <p class="section-description">
+        Have a project or opportunity?
+        Feel free to get in touch.
+    </p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <p class="notice {{ category }}">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    <form action="/contact" method="POST">
+
+        <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required
+        >
+
+        <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            required
+        >
+
+        <textarea
+            name="message"
+            placeholder="Your Message"
+            required
+        ></textarea>
+
+        <button type="submit" class="btn">
+            Send Message
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>© 2026 Your Name | Personal Portfolio</p>
+</footer>
+
+</body>
+</html>
